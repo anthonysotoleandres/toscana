@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Toscana</title>
 
     <!-- Custom fonts for this template-->
     <link href="Vistas\vendor\fontawesome-free\css\all.min.css" rel="stylesheet" type="text/css">
@@ -18,7 +18,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="Vistas\css\sb-admin-2.min.css" rel="stylesheet">
+    <link href="Vistas\css\sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -27,26 +27,51 @@
     <?php
 		include 'Modulos/menu.php';
 	?>
+
+<div class="ms-content-wrapper">
+		<?php
+			$rutasC = new RutasC();
+			$modulo = $rutasC->procesaRutasC();
+			include $modulo;
+		?>
+ </div> 
  
 
-
+    <!-- Footer -->
+<!--     <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2021</span>
+            </div>
+        </div>
+    </footer> -->
+ </div>
+ </div>
+ </div>
+ 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="Vistas\vendor\jquery\jquery.min.js"></script>
-    <script src="Vistas\vendor\bootstrap\js\bootstrap.bundle.min.js"></script>
+    <script src="Vistas\vendor\jquery\jquery.js"></script>
+    <script src="Vistas\vendor\bootstrap\js\bootstrap.bundle.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="Vistas\vendor\jquery-easing\jquery.easing.min.js"></script>
+    <script src="Vistas\vendor\jquery-easing\jquery.easing.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="Vistas\js\sb-admin-2.min.js"></script>
+    <script src="Vistas\js\sb-admin-2.js"></script>
 
     <!-- Page level plugins -->
-    <script src="Vistas\vendor\chart.js\Chart.min.js"></script>
+    <script src="Vistas\vendor\chart.js\Chart.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="Vistas\js\demo\chart-area-demo.js"></script>
     <script src="Vistas\js\demo\chart-pie-demo.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="Vistas\vendor\datatables\jquery.dataTables.js"></script>
+        <script src="Vistas\vendor\datatables\dataTables.bootstrap4.js"></script>
+        <script src="Vistas\js\demo\datatables-demon.js"></script>
+        
 
 </body>
 
