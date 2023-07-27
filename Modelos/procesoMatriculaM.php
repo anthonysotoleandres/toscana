@@ -75,6 +75,23 @@ class procesoMatriculaM extends ConexionBD{
 
     }
 
+    /// /MOSTRAR ESTUDIANTES 2
+    public function mostrarMatriculas2M($datosC){
+        $cBD = $this->conectarBD();
+        $iduser=$_SESSION['Ingreso'];
+
+        $dniEstudiante=$datosC['dni'];
+
+        $query = "SELECT matriculas.ciclo, matriculas.codigo_estudiante
+        FROM estudiantes
+        JOIN matriculas  ON estudiantes.idestudiantes = matriculas.estudiantes_idestudiantes
+        WHERE estudiantes.dni = '$dniEstudiante'";
+
+        $resultado = $cBD->query($query);
+        return $resultado;
+
+    }
+
 
 } 
 ?>

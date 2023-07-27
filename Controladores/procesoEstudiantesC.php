@@ -35,11 +35,32 @@ class procesoEstudiantesC {
         $datosC = array();
         $datosC['idestudiantes'] = $_GET['idESTU'];
         $resultado=$this->procesoEstudiantesM->borrarEstudiantesM($datosC);
-      
+        header("location: index.php?ruta=registroestudiantes");
+        exit();
         
     }
 }
-    
+   
+
+// MODIFICAR ESTUDIANTES
+
+public function moficarEstudiantesC(){
+    if(isset($_POST['nombreME'])){
+        $datosC = array();  
+        $datosC['nombre']= $_POST['nombreME'];
+        $datosC['apellido']= $_POST['apellidoME'];           
+        $datosC['dni']= $_POST['dniME'];
+        $datosC['genero']= $_POST['generoME']; 
+        $datosC['telefono']= $_POST['telefonoME'];
+        $datosC['email']= $_POST['emailME'];
+                    
+        $resultado = $this->procesoEstudiantesM->moficarEstudiantesM($datosC);
+        header("location: index.php?ruta=registroestudiantes");
+        exit();
+        return $resultado;
+        
+    }
+}
 
 }
 ?>

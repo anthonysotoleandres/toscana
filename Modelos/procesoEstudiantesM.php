@@ -35,7 +35,7 @@ class procesoEstudiantesM extends ConexionBD{
         $password = password_hash($pw_temp, PASSWORD_DEFAULT);
         
         $query = "INSERT INTO $this->tablaBD VALUES 
-            (NULL,'$nombre','$apellido','$tefefono','$genero','$dnii','$email','$password','estudiante')";
+            (NULL,'$nombre','$apellido','$tefefono','$genero','$dnii','$email','$password','estudiante',01)";
 
         $resultado = $cBD->query($query);
         return $resultado;
@@ -47,7 +47,7 @@ class procesoEstudiantesM extends ConexionBD{
         $cBD = $this->conectarBD();
         $iduser=$_SESSION['Ingreso'];
 
-        $query = "SELECT * FROM $this->tablaBD";
+        $query = "SELECT * FROM $this->tablaBD WHERE estado = 01";
 
         $resultado = $cBD->query($query);
         return $resultado;
@@ -62,13 +62,38 @@ class procesoEstudiantesM extends ConexionBD{
         $IDE = $datosC['idestudiantes'];
     
 
-        $query = "DELETE FROM matriculas WHERE estudiantes_idestudiantes='$IDE';
-        DELETE FROM $this->tablaBD WHERE idestudiantes='$IDE'";
+        $query = "UPDATE estudiantes SET estado = 02 WHERE idestudiantes = '$IDE'";
         $resultado = $cBD->query($query);
     
         return $resultado;
     }
 
+    /// MODIFICAR ESTUDIANTES   
+    public function moficarEstudiantesM($datosC){
+        $cBD = $this->conectarBD();
+        $iduser=$_SESSION['Ingreso'];
+
+        $nombre = $datosC['nombre'];
+        $apellido = $datosC['apellido'];
+        $dni = $datosC['dni'];
+        $genero = $datosC['genero'];
+        $telefono = $datosC['telefono'];
+        $email = $datosC['email'];
+
+        
+        $query = "UPDATE $this->tablaBD
+            SET 
+            nombre='$nombre', 
+            apellido='$apellido',      
+            dni='$dni',
+            genero='$genero',
+            telefono='$telefono',
+            email='$email'
+            WHERE dni=$dni";
+        
+        $resultado = $cBD->query($query);
+        return $resultado;    
+    }
 
 } 
 ?>

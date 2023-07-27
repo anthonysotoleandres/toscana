@@ -6,16 +6,20 @@ class procesoMatriculaC {
 
 
  // MOSTRAR ESTUDIANTES
- public function mostrarEstudiantesC(){
-            if(isset($_POST['dniBU'])){
-                $datosC =array();
-                
-                $datosC['dni'] = $_POST['dniBU'];
-                $resultado = $this->procesoMatriculaM->mostrarEstudiantesM($datosC);
+public function mostrarEstudiantesC() {
+    if (isset($_POST['dniBU'])) {
+        $datosC = array();
+        $datosC['dni'] = $_POST['dniBU'];
 
-                return $resultado;
+        $resultado = $this->procesoMatriculaM->mostrarEstudiantesM($datosC);
+
+        return $resultado;
+    } else {
+        return null;
     }
-}   
+}
+
+  
 
 
     // registrar matricula de estudiantes
@@ -30,9 +34,8 @@ class procesoMatriculaC {
             $datosC['mensualidad'] = $_POST['mensualidadRM'];
             $datosC['año'] = $_POST['añoRM'];
             
-            
             $resultado = $this->procesoMatriculaM->registroMatriculaM($datosC);
-            
+            /// volver a inicio
 
         }
     }
@@ -50,6 +53,22 @@ class procesoMatriculaC {
     $resultado = $this->procesoMatriculaM->mostrarEstudiantesMatriculadosM();
     return $resultado;
 }   
+
+ // MOSTRAR MATRICULAS 2
+ public function mostrarMatriculas2C(){
+    if (isset($_POST['dniBU'])) {
+        $datosC = array();
+        $datosC['dni'] = $_POST['dniBU'];
+
+        $resultado = $this->procesoMatriculaM->mostrarMatriculas2M($datosC);
+        
+        return $resultado;
+    } else {
+        return null;
+    }
+}    
+
+
 
 }
 ?>

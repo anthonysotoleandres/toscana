@@ -3,6 +3,9 @@ $matricularC = new procesoMatriculaC();
 $matricularC->registroMatriculaC();
 
 $mostrarEstudiantes = $matricularC->mostrarEstudiantesC();
+
+$mostrarMatriculas = $matricularC->mostrarMatriculas2C();
+
 ?>
 
 
@@ -36,69 +39,127 @@ $mostrarEstudiantes = $matricularC->mostrarEstudiantesC();
                             </div>
 
                             <div class="form-row align-items-center">
-                                <form method="post" class="col-6">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar DNI"
-                                            aria-label="Search" aria-describedby="basic-addon2" name="dniBU">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="submit">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                                
-                                <div class="form-group col-sm-6">
-                                    <div class="row">
-                                        <label for="nombre" class="font-weight-bold col-sm-3">Nombre:</label>
-                                        <div class="col-sm-9">
-                                            <?php if (isset($_POST['dniBU'])): ?>
-                                                <?php foreach($mostrarEstudiantes as $mostrarEstudiante): ?>                       
-                                                    <input type="text" value=<?=$mostrarEstudiante['nombre']?> class="form-control" id="nombre" readonly>
-                                                <?php endforeach; ?> 
-                                                <?php else: ?>
-                                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre">
-                                            <?php endif; ?>
-                                        </div>
+                            <form method="post" class="col-6">
+                                <div class="input-group">
+                                    <input type="number" class="form-control bg-light border-0 small" placeholder="Buscar DNI"
+                                        aria-label="Search" aria-describedby="basic-addon2" name="dniBU" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        maxlength="8" min="10000000" max="99999999" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
                                     </div>
                                 </div>
+                            </form>
+                                  <!-- ENTRADA DE NOMBRE  -->                  
+                            <div class="form-group col-sm-6">
+                                <div class="row">
+                                    <label for="nombre" class="font-weight-bold col-sm-3">Nombre:</label>
+                                    <div class="col-sm-9">
+                                        <?php if (isset($_POST['dniBU']) && !empty($_POST['dniBU'])): ?>
+                                            <?php $mostrarEstudiantes = $matricularC->mostrarEstudiantesC(); ?>
+                                            <?php if ($mostrarEstudiantes !== null && mysqli_num_rows($mostrarEstudiantes) > 0): ?>
+                                                <?php while ($mostrarEstudiante = mysqli_fetch_assoc($mostrarEstudiantes)): ?>                       
+                                                    <input type="text" value="<?=$mostrarEstudiante['nombre']?>" class="form-control" id="nombre" readonly>
+                                                <?php endwhile; ?> 
+                                            <?php else: ?>
+                                                <input type="text" class="form-control" id="nombre" value="Nombre no Encontrado" readonly>
+                                            <?php endif; ?>
+                                        <?php else: ?>
+                                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" readonly>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
 
+                                <!-- ENTRADA DE APELLIDO  -->
                                 <div class="form-group col-sm-6">
                                     <div class="row">
                                         <label for="apellido" class="font-weight-bold col-sm-3">Apellido:</label>
                                         <div class="col-sm-9">
 
-                                            <?php if (isset($_POST['dniBU'])): ?>
-                                                <?php foreach($mostrarEstudiantes as $mostrarEstudiante): ?>                       
+                                        <?php if (isset($_POST['dniBU']) && !empty($_POST['dniBU'])): ?>
+                                            <?php $mostrarEstudiantes = $matricularC->mostrarEstudiantesC(); ?>
+                                            <?php if ($mostrarEstudiantes !== null && mysqli_num_rows($mostrarEstudiantes) > 0): ?>
+                                                <?php while ($mostrarEstudiante = mysqli_fetch_assoc($mostrarEstudiantes)): ?>                       
                                                     <input type="text" value="<?=$mostrarEstudiante['apellido']?>" class="form-control" id="apellido" readonly>
-                                                <?php endforeach; ?> 
-                                                <?php else: ?>
-                                                    <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+                                                <?php endwhile; ?> 
+                                            <?php else: ?>
+                                                <input type="text" class="form-control" id="apellido" placeholder="Apellido no Encontrado" readonly>
                                             <?php endif; ?>
+                                        <?php else: ?>
+                                            <input type="text" class="form-control" id="apellido" placeholder="Apellido" readonly>
+                                        <?php endif; ?>
 
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ENTRADA DE TELEFONO  -->
+                                <div class="form-group col-sm-6">
+                                    <div class="row">
+                                        <label for="telefono" class="font-weight-bold col-sm-3">Teléfono:</label>
+                                        <div class="col-sm-9">
+                                            <?php if (isset($_POST['dniBU']) && !empty($_POST['dniBU'])): ?>
+                                                <?php $mostrarEstudiantes = $matricularC->mostrarEstudiantesC(); ?>
+                                                <?php if ($mostrarEstudiantes !== null && mysqli_num_rows($mostrarEstudiantes) > 0): ?>
+                                                    <?php while ($mostrarEstudiante = mysqli_fetch_assoc($mostrarEstudiantes)): ?>                       
+                                                        <input type="text" value="<?=$mostrarEstudiante['telefono']?>" class="form-control" id="telefono" readonly>
+                                                    <?php endwhile; ?> 
+                                                <?php else: ?>
+                                                    <input type="text" class="form-control" id="telefono" value="Teléfono no Encontrado" readonly>
+                                                <?php endif; ?>
+                                            <?php else: ?>
+                                                <input type="tel" class="form-control" id="telefono" placeholder="Teléfono" readonly>
+                                            <?php endif; ?>                                
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group col-sm-6">
                                     <div class="row">
-                                        <label for="telefono" class="font-weight-bold col-sm-3">Teléfono:</label>
+                                        <label for="ciclo" class="font-weight-bold col-sm-3">Ciclo:</label>
                                         <div class="col-sm-9">
-                                            <?php if (isset($_POST['dniBU'])): ?>
-                                                <?php foreach($mostrarEstudiantes as $mostrarEstudiante): ?>                       
-                                                    <input type="text" value=<?=$mostrarEstudiante['telefono']?> class="form-control" id="telefono" readonly>
-                                                <?php endforeach; ?> 
+                                            <?php if (isset($_POST['dniBU']) && !empty($_POST['dniBU'])): ?>
+                                                <?php $mostrarMatriculas = $matricularC->mostrarMatriculas2C(); ?>
+                                                <?php if ($mostrarMatriculas !== null && mysqli_num_rows($mostrarMatriculas) > 0): ?>
+                                                    <?php $datosEstudiante = mysqli_fetch_assoc($mostrarMatriculas); ?>
+                                                    <input type="text" value="<?= $datosEstudiante['ciclo'] ?>" class="form-control" id="ciclo" readonly>
                                                 <?php else: ?>
-                                                    <input type="tel" class="form-control" id="telefono" placeholder="Teléfono">
+                                                    <input type="text" class="form-control" id="ciclo" value="Ciclo no Encontrado o No Asignado" readonly>
+                                                <?php endif; ?>
+                                            <?php else: ?>
+                                                <input type="text" class="form-control" id="ciclo" placeholder="Ciclo" readonly>
                                             <?php endif; ?>
-
-
-
-
-                                            
                                         </div>
                                     </div>
                                 </div>
+
+
+
+
+
+
+                                <!-- Agrega codigo estudiantes -->
+                                <div class="form-group col-sm-6">
+                                    <div class="row">
+                                        <label for="codigo" class="font-weight-bold col-sm-3">Código:</label>
+                                        <div class="col-sm-9">
+                                            <?php if (isset($_POST['dniBU']) && !empty($_POST['dniBU'])): ?>
+                                                <?php $mostrarMatriculas = $matricularC->mostrarMatriculas2C(); ?>
+                                                <?php if ($mostrarMatriculas !== null && mysqli_num_rows($mostrarMatriculas) > 0): ?>
+                                                    <?php $datosEstudiante = mysqli_fetch_assoc($mostrarMatriculas); ?>
+                                                    <input type="text" value="<?= $datosEstudiante['codigo_estudiante'] ?>" class="form-control" id="codigo" readonly>
+                                                <?php else: ?>
+                                                    <input type="text" class="form-control" id="codigo" value="Código no Encontrado o No Asignado" readonly>
+                                                <?php endif; ?>
+                                            <?php else: ?>
+                                                <input type="text" class="form-control" id="codigo" placeholder="Código" readonly>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
 
                             <div style="display: flex; align-items: center; margin: 20px 0;">

@@ -20,13 +20,19 @@ $mostrarMatriculas = $registrarC->mostrarMatriculasC();
         <div class="col-lg-12">
 
             <div class="card position-relative">
+                
                 <div class="card-header py-3">               
                     <div class="d-sm-flex align-items-center justify-content-between mb-6">
                     <h6 class="m-0 font-weight-bold text-primary">Matriculas</h6>   
-                            <a href="index.php?ruta=matriculaestudiantes" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" >                         
+                            <a href="index.php?ruta=matriculaestudiantes" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm " style="float: left;" >                         
                                 <i class="fas fa-solid fa-plus fa-sm "></i>
                                 </i> Realizar Matricula</a>
+                                
+                                
+
+                                    
                         </div>
+                        
                 </div>
                 
                 <div class="card-body">
