@@ -41,8 +41,13 @@ class procesoMatriculaM extends ConexionBD{
         
         $query = "INSERT INTO $this->tablaBD2 VALUES 
             (NULL,'$fecha_matricula','$año','$turno','$ciclo','$matricula','$mensualidad','$dodigo ',$id)";
+
+
+        $query2 = "UPDATE $this->tablaBD SET 
+                ciclo = '$ciclo' WHERE estudiantes.idestudiantes = $id ";
     
         $result = $cBD->query($query);
+        $result2 = $cBD->query($query2);
         return $result;
     }
 

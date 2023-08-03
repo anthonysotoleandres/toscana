@@ -19,6 +19,18 @@ class perfilM extends ConexionBD{
 
     }
 
+    public function mostrarPerfil2M(){
+        $cBD = $this->conectarBD();
+
+            $iduser=$_SESSION['Ingreso'];
+
+            $query = "SELECT *
+                    FROM $this->tablaBD1 where idestudiantes =$iduser";
+            $result = $cBD->query($query);
+            return $result;
+
+    }
+
 // actualizar perfil
     public function actualizarPerfilM($datosC){
         $cBD = $this->conectarBD();

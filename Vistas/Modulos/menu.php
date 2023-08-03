@@ -10,6 +10,7 @@ ob_start(); // Habilitar almacenamiento en búfer de salida bg-gradient-success
 <?php
 $perfilC = new perfilC();
 $mostrarPerfiles = $perfilC->mostrarPerfilC();
+$mostrarPerfiles2 = $perfilC->mostrarPerfil2C();
 ?>
 
 <?php if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'administrador'): ?>
@@ -222,6 +223,7 @@ $mostrarPerfiles = $perfilC->mostrarPerfilC();
 <!-- --------------------------------------------------------------------------------------------------------------------------------------------- -->
 <!-- --------------------------------------------------------------------------------------------------------------------------------------------- -->
 <!-- MOSTRAR MENU PARA LOS ESTUDIANTES -->
+
 <?php elseif (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'estudiante'): ?>
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -253,41 +255,35 @@ $mostrarPerfiles = $perfilC->mostrarPerfilC();
             
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fa fa-book"></i>
-                    <span>Información de Cursos</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Informes:</h6>
-                        
-                        <a class="collapse-item" href="index.php?ruta=plan_estudio">Plan de Estudio Estudiantes</a>
-                        <a class="collapse-item" href="index.php?ruta=horario">Horarios</a>
-                        
-                        
-                    </div>
-                </div>
-            </li>
+          
 
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3"
-                    aria-expanded="true" aria-controls="collapse3">
+                <a class="nav-link collapsed" href="index.php?ruta=reporte_estudiantes" >
                     <i class="fas fa-file"></i>
 
                     <span>Reportes de Docentes</span>
                 </a>
-                <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Generacion de Reportes Estudiantes</h6>
-                        <a class="collapse-item" href="index.php?ruta=reporte_estudiantes">Reporte de Estudiantes</a>        
-                        <a class="collapse-item" href="index.php?ruta=reporte_docentes">Reporte de Docentes</a>
-                    </div>
-                </div>
+
+                <li class="nav-item">
+                <a class="nav-link collapsed" href="index.php?ruta=plan_estudio" >
+                    <i class="fas fa-file"></i>
+
+                    <span>Plan de Estudio Estudiantes</span>
+                </a>
+
+                <li class="nav-item">
+                <a class="nav-link collapsed" href="index.php?ruta=horario" >
+                    <i class="fas fa-file"></i>
+
+                    <span>Horarios</span>
+                </a>
+
+            
+
+
+                
             </li>
 
          
@@ -343,7 +339,7 @@ $mostrarPerfiles = $perfilC->mostrarPerfilC();
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    <?php foreach($mostrarPerfiles as $mostrarPerfil): ?> 
+                                    <?php foreach($mostrarPerfiles2 as $mostrarPerfil): ?> 
                                         <p class="mb-1"><?=$mostrarPerfil['nombre']?> <?=$mostrarPerfil['apellido']?></p>                     
                                     <?php endforeach; ?>
                                 </span>
@@ -353,7 +349,7 @@ $mostrarPerfiles = $perfilC->mostrarPerfilC();
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="index.php?ruta=perfil">
+                                <a class="dropdown-item" href="index.php?ruta=perfil_estudiantes">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Perfil
                                 </a>

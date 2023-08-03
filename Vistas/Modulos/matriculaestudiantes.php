@@ -200,12 +200,12 @@ $mostrarMatriculas = $matricularC->mostrarMatriculas2C();
                                         <label for="nombre" class="font-weight-bold">Ciclo</label>
                                         <select class="form-control" id="genero" name="cicloRM">
                                             <option value="">Seleccionar</option>
-                                            <option value="Ciclo-I">Ciclo-I</option>
-                                            <option value="Ciclo-II">Ciclo-II</option>
-                                            <option value="Ciclo-III">Ciclo-III</option>
-                                            <option value="Ciclo-IV">Ciclo-IV</option>
-                                            <option value="Ciclo-V">Ciclo-V</option>
-                                            <option value="Ciclo-VI">Ciclo-VI</option>
+                                            <option value="1">Ciclo-I</option>
+                                            <option value="2">Ciclo-II</option>
+                                            <option value="3">Ciclo-III</option>
+                                            <option value="4">Ciclo-IV</option>
+                                            <option value="5">Ciclo-V</option>
+                                            <option value="6">Ciclo-VI</option>
                                         </select>
                                     </div>
 

@@ -16,6 +16,8 @@ class RutasM{
             $ruta == 'registro_cursos' ||
             $ruta == 'boleta_matricula' ||
             $ruta == 'estudiante_matricula' ||
+            $ruta == 'ficha_matricula' ||
+            $ruta == 'perfil_estudiantes' ||
 
             $ruta == 'perfil')
         {

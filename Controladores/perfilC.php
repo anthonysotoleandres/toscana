@@ -10,6 +10,13 @@ class perfilC {
         
 
     }
+        //mostrar perfil de usuario
+        public function mostrarPerfil2C(){
+            $resultado = $this->perfilM->mostrarPerfil2M();
+            return $resultado;
+            
+    
+        }
 
     //actualizar perfil 
     public function actualizarPerfilC(){

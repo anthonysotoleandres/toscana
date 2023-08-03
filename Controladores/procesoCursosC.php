@@ -8,7 +8,19 @@ class procesoCursosC {
  public function mostrarCursosC(){
     $resultado = $this->procesoCursosM->mostrarCursosM();
     return $resultado;
-}       
+}  
+ // MOSTRAR Cursos para matricula
+ public function mostrarCursosMatriculaC(){
+    $resultado = $this->procesoCursosM->mostrarCursosMatriculaM();
+    return $resultado;
+}   
+
+ // MOSTRAR Cursos matriculados//
+ public function mostrarMatriculadosC(){
+    $resultado = $this->procesoCursosM->mostrarMatriculadosM();
+    ///
+    return $resultado;
+} 
 
     // registrar CURSOS
     public function registroCursosC(){
@@ -27,6 +39,25 @@ class procesoCursosC {
 
         }
     }
+
+
+// Registrar cursos para los estudiantes
+public function registroCursoMatriculaC() {
+    if (isset($_POST['cursoSeleccionado'])) {
+        $datosC = array();
+        $datosC['cursos'] = $_POST['cursoSeleccionado'];
+
+        // Aquí puedes hacer cualquier otra operación que necesites antes de enviar los datos al modelo
+
+        $resultado = $this->procesoCursosM->registroCursoMatriculaM($datosC);
+
+        // Puedes realizar alguna acción adicional o redirigir a otra página después de procesar los datos
+        // Por ejemplo, redirigir a una página de confirmación o mostrar un mensaje de éxito.
+        header("location: index.php?ruta=estudiante_matricula");
+        exit();
+    }
+}
+
     
 
 }
