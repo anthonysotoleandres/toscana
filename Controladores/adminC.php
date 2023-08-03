@@ -18,6 +18,7 @@ class AdminC{
             if ($resultado){
                 session_start(); 
                 $_SESSION['Ingreso']=$resultado;
+                $_SESSION['perfil'] = $datosC['perfil']; // Almacenar el perfil del usuario en una variable de sesión
                 header("location: index.php?ruta=dashboard");
             }
             else

@@ -115,7 +115,7 @@ $mostrarMatriculas = $matricularC->mostrarMatriculas2C();
                                     </div>
                                 </div>
 
-                                <div class="form-group col-sm-6">
+                               <!--  <div class="form-group col-sm-6">
                                     <div class="row">
                                         <label for="ciclo" class="font-weight-bold col-sm-3">Ciclo:</label>
                                         <div class="col-sm-9">
@@ -132,7 +132,7 @@ $mostrarMatriculas = $matricularC->mostrarMatriculas2C();
                                             <?php endif; ?>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
 
 
@@ -145,12 +145,16 @@ $mostrarMatriculas = $matricularC->mostrarMatriculas2C();
                                         <label for="codigo" class="font-weight-bold col-sm-3">Código:</label>
                                         <div class="col-sm-9">
                                             <?php if (isset($_POST['dniBU']) && !empty($_POST['dniBU'])): ?>
-                                                <?php $mostrarMatriculas = $matricularC->mostrarMatriculas2C(); ?>
-                                                <?php if ($mostrarMatriculas !== null && mysqli_num_rows($mostrarMatriculas) > 0): ?>
-                                                    <?php $datosEstudiante = mysqli_fetch_assoc($mostrarMatriculas); ?>
-                                                    <input type="text" value="<?= $datosEstudiante['codigo_estudiante'] ?>" class="form-control" id="codigo" readonly>
+                                                <?php $mostrarEstudiantes = $matricularC->mostrarEstudiantesC(); ?>
+                                                <?php if ($mostrarEstudiantes !== null && mysqli_num_rows($mostrarEstudiantes) > 0): ?>
+                                                    <?php $datosEstudiante = mysqli_fetch_assoc($mostrarEstudiantes); ?>
+                                                    <?php if ($datosEstudiante['codigo_estudiante'] !== null): ?>
+                                                        <input type="text" value="<?= $datosEstudiante['codigo_estudiante'] ?>" class="form-control" id="codigo" readonly>
+                                                    <?php else: ?>
+                                                        <input type="text" class="form-control" id="codigo" value="Código No Asignado" readonly>
+                                                    <?php endif; ?>
                                                 <?php else: ?>
-                                                    <input type="text" class="form-control" id="codigo" value="Código no Encontrado o No Asignado" readonly>
+                                                    <input type="text" class="form-control" id="codigo" value="Código no Encontrado" readonly>
                                                 <?php endif; ?>
                                             <?php else: ?>
                                                 <input type="text" class="form-control" id="codigo" placeholder="Código" readonly>
@@ -158,6 +162,7 @@ $mostrarMatriculas = $matricularC->mostrarMatriculas2C();
                                         </div>
                                     </div>
                                 </div>
+
 
 
                             </div>
@@ -170,16 +175,23 @@ $mostrarMatriculas = $matricularC->mostrarMatriculas2C();
 
                             <?php if (isset($_POST['dniBU'])): ?>
                                                                      
-                                <form method="post">
-                                    <?php foreach($mostrarEstudiantes as $mostrarEstudiante): ?>                       
-                                                    <input type="number" value=<?=$mostrarEstudiante['idestudiantes']?> name="idRM" hidden >
+                                <form method="post" id="matriculaForm">
+                                    <?php foreach($mostrarEstudiantes as $mostrarEstudiante): ?>   
+                                        <input type="number" value=<?=$mostrarEstudiante['idestudiantes']?> name="idRM" hidden >
+
+                                        <?php
+                                           
+                                            $IDE = $mostrarEstudiante['idestudiantes'];
+                                        ?>
+                                                  
+                                                    
                                         <?php endforeach; ?>
                                 <div class="form-row align-items-center">
                                     <div class="form-group col-sm-4">
                                         <label for="nombre" class="font-weight-bold">Fecha de Matricula</label>
                                         <?php
                                             date_default_timezone_set("America/Lima"); // establecer la zona horaria a Lima
-                                            $hoy = date("H:i/d/M"); // obtener la hora, el minuto, el día y el mes actual
+                                            $hoy = date("H:i/d/M/Y"); // obtener la hora, el minuto, el día y el mes actual
                                         ?>
                                         <input type="text" class="form-control" id="nombre" value=<?=$hoy?> name="fecha_matriculaRM" readonly>
                                     </div>
@@ -220,42 +232,74 @@ $mostrarMatriculas = $matricularC->mostrarMatriculas2C();
                                         <input type="number" class="form-control" id="mensualidad" placeholder="S/." name="mensualidadRM">
                                     </div>
                                     
-                                    <div class="form-group col-sm-4">
-                                        <label for="estado" class="font-weight-bold">Año Academico</label>
-                                            <?php
-                                                date_default_timezone_set("America/Lima"); // fecha horarioa
-                                                $hoy = date("Y", time()); //sacando la fecha
-                                            ?>
-                                        <input type="number" class="form-control" id="estado" value=<?=$hoy?> name="añoRM" readonly>
-                                    </div>
+                                    <!-- Select para el año académico -->
+                                        <!-- Select para el año académico -->
+                                        <div class="form-group col-sm-4">
+                                                <label for="añoRM" class="font-weight-bold">Año Academico</label>
+                                                <?php
+                                                date_default_timezone_set("America/Lima");
+                                                $hoy = date("Y", time());
+                                                $trimestres = array(1, 2, 3); // array con los números de trimestre
+                                                $aniosMostrar = 3; // cantidad de años a mostrar después del año actual
+                                                ?>
+                                                <select class="form-control" id="añoRM" name="añoRM">
+                                                    <?php for ($i = 0; $i <= $aniosMostrar; $i++) : ?>
+                                                        <?php foreach ($trimestres as $trimestre) : ?>
+                                                            <?php $anio = $hoy + $i; ?>
+                                                            <?php $trimestreFormateado = sprintf("%02d", $trimestre); $academico = $trimestreFormateado; ?>
+                                                            <option value="<?= $anio ?>-<?= $trimestreFormateado ?>"><?= $anio ?>-<?= $trimestreFormateado ?></option>
+                                                        <?php endforeach; ?>
+                                                    <?php endfor; ?>
+                                                </select>
+                                            </div>
+
+                                            <!-- Campo oculto para enviar el valor de codigo de estudiante -->
+                                            <input type="hidden" id="codigo_estudianteRM" name="codigo_estudianteRM">
+
+
+                                           
+
+
                                     
                                     <div class="form-group col-sm-12 text-center">
                                         <button class="btn btn-primary" type="submit">Guardar cambios</button>
                                     </div>
                                 </div>
                             </form>
-                                                
+                            <script>
+                                // Función para generar el código de estudiante
+                                function generarCodigoEstudiante() {
+                                    var añoAcademicoSelect = document.getElementById("añoRM");
+                                    var añoAcademicoValue = añoAcademicoSelect.value;
+
+                                    // Formatear el año académico seleccionado para obtener el código de estudiante
+                                    var partes = añoAcademicoValue.split("-");
+                                    var año = partes[0]; // Obtener solo los últimos dos dígitos del año
+                                    var trimestre = partes[1];
+
+                                    var idEstudiante = <?= $IDE ?>;
+                                    var inicialesInstituto = "LT";
+                                    var primerosDigitos = String(idEstudiante).padStart(4, "0");
+                                    var codigoEstudiante = inicialesInstituto + "-" + primerosDigitos + año + trimestre;
+
+                                    // Asignar el valor generado al campo oculto
+                                    document.getElementById("codigo_estudianteRM").value = codigoEstudiante;
+                                }
+ 
+                                // Llamar a la función al cargar la página y cuando se cambie la selección del select
+                                window.onload = generarCodigoEstudiante;
+                                document.getElementById("añoRM").addEventListener("change", generarCodigoEstudiante);
+                            </script>
+
+                            
+
                                                 <?php else: ?>
                                                     
                                             <?php endif; ?>
                            
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         </div>
-
+ 
                     </div>
 
                 </div>

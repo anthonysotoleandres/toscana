@@ -35,11 +35,12 @@ class procesoMatriculaM extends ConexionBD{
         $matricula = $datosC['matricula'];
         $mensualidad = $datosC['mensualidad'];
         $año = $datosC['año'];
+        $dodigo = $datosC['codigo_estudiante'];
     
     
         
         $query = "INSERT INTO $this->tablaBD2 VALUES 
-            (NULL,'$fecha_matricula','$año','$turno','$ciclo','$matricula','$mensualidad',$id)";
+            (NULL,'$fecha_matricula','$año','$turno','$ciclo','$matricula','$mensualidad','$dodigo ',$id)";
     
         $result = $cBD->query($query);
         return $result;
@@ -91,6 +92,63 @@ class procesoMatriculaM extends ConexionBD{
         return $resultado;
 
     }
+
+        /// MODIFICAR CODIGO DEL ESTUDIANTES   
+        public function registrarCodigoM($datosC){
+            $cBD = $this->conectarBD();
+            $iduser=$_SESSION['Ingreso'];
+
+
+            $id = $datosC['id'];
+            $codigo = $datosC['codigo_estudiante'];
+
+            
+            $query = "UPDATE $this->tablaBD
+                SET 
+                codigo_estudiante='$codigo'
+                
+                WHERE idestudiantes=$id";
+            
+            $resultado = $cBD->query($query);
+            return $resultado;    
+        }
+
+
+    /// /BORRAR MATRICULA  
+    public function borrarMatriculaM($datosC){
+        $cBD = $this->conectarBD();
+        $iduser=$_SESSION['Ingreso'];
+    
+        $IDE = $datosC['idmatriculas'];
+    
+
+        $query = "DELETE FROM matriculas WHERE matriculas.idmatriculas = '$IDE'";
+        $resultado = $cBD->query($query);
+    
+        return $resultado;
+    }
+
+    /// MODIFICAR MATRICULAS 
+    public function modificarMatriculaM($datosC){
+        $cBD = $this->conectarBD();
+        $iduser=$_SESSION['Ingreso'];
+
+        $idmatricula = $datosC['idmatriculas'];
+        $matricula = $datosC['matricula'];
+        $mensualidad = $datosC['mensualidad'];
+        
+
+        
+        $query = "UPDATE matriculas
+            SET 
+            matricula='$matricula', 
+            mensualidad='$mensualidad'      
+            
+            WHERE matriculas.idmatriculas='$idmatricula'";
+        
+        $resultado = $cBD->query($query);
+        return $resultado;    
+    }   
 
 
 } 

@@ -13,7 +13,9 @@ class RutasM{
             $ruta == 'reporte_estudiantes' ||
             $ruta == 'registro_docentes' ||
             $ruta == 'reporte_docentes' ||
-            $ruta == 'mantenimiento_usuarios' ||
+            $ruta == 'registro_cursos' ||
+            $ruta == 'boleta_matricula' ||
+            $ruta == 'estudiante_matricula' ||
 
             $ruta == 'perfil')
         {

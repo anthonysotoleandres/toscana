@@ -3,6 +3,7 @@ $registrarC = new procesoEstudiantesC();
 $registrarC->registroEstudiantesC();
 $mostrarEstudiantes = $registrarC->mostrarEstudiantesC();
 $mostrarDatos = $registrarC->mostrarEstudiantesC();
+
 $registrarC->borrarEstudiantesC();
 $registrarC->moficarEstudiantesC();
 
@@ -61,136 +62,136 @@ $registrarC->moficarEstudiantesC();
                                                     <td><?=$mostrarEstudiante['email']?></td>
                                                     
                                                     <td>
-                                                        <!-- Enlace para modificar el estudiante -->
-                                                    <a href="#registroEstudianteModal<?=$mostrarEstudiante['idestudiantes']?>" class="btn btn-info btn-circle" data-toggle="modal">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                                                                            
-                                                    <!-- Ventana emergente para modificar el estudiante -->
-                                                        <div class="modal fade" id="registroEstudianteModal<?=$mostrarEstudiante['idestudiantes']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-lg" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">Modificar Estudiante</h5>
-                                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">×</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <form method="post" class="user">
-
-                                                                            <div class="form-group row">
-                                                                                <label for="nombre" class="col-sm-2 col-form-label font-weight-bold">Nombre:</label>
-                                                                                <div class="col-sm-10">
-                                                                                
-                                                                                <?php foreach($mostrarDatos as $mostrarDato):?> 
-                                                                                    <?php if ($mostrarDato['idestudiantes'] == $mostrarEstudiante['idestudiantes']): ?>
-                                                                                    <input type="text" value="<?=$mostrarDato['nombre']?>" class="form-control" id="nombre" placeholder="Nombre" name="nombreME">
-                                                                                    <?php endif; ?>
-                                                                                <?php endforeach; ?>  
-                                                                                
-                                                                                </div>
-                                                                            </div>
-
-
-                                                                            <div class="form-group row">
-                                                                                <label for="apellido" class="col-sm-2 col-form-label font-weight-bold">Apellido:</label>
-                                                                                <div class="col-sm-10">
-                                                                                <?php foreach($mostrarDatos as $mostrarDato):?> 
-                                                                                    <?php if ($mostrarDato['idestudiantes'] == $mostrarEstudiante['idestudiantes']): ?>
-                                                                                    <input type="text"  value="<?=$mostrarDato['apellido']?>" class="form-control" id="apellido" placeholder="Apellido" name="apellidoME">
-                                                                                    <?php endif; ?>
-                                                                                <?php endforeach; ?>  
-                                                                                </div>
-                                                                            </div>
-
-
-                                                                            <div class="form-group row">
-                                                                                <label for="dni" class="col-sm-2 col-form-label font-weight-bold">DNI:</label>
-                                                                                <div class="col-sm-10">
-                                                                                <?php foreach($mostrarDatos as $mostrarDato):?> 
-                                                                                    <?php if ($mostrarDato['idestudiantes'] == $mostrarEstudiante['idestudiantes']): ?>
-                                                                                    <input type="number" value="<?=$mostrarDato['dni']?>" class="form-control" id="dni" placeholder="DNI" name="dniME">
-                                                                                    <?php endif; ?>
-                                                                                <?php endforeach; ?>
-                                                                                </div>
-                                                                            </div>
-
-
-                                                                            <div class="form-group row">
-                                                                                <label for="genero" class="col-sm-2 col-form-label font-weight-bold">Género:</label>
-                                                                                <div class="col-sm-10">
-                                                                                <?php foreach($mostrarDatos as $mostrarDato):?> 
-                                                                                    <?php if ($mostrarDato['idestudiantes'] == $mostrarEstudiante['idestudiantes']): ?>
-                                                                                    <input type="text" value="<?=$mostrarDato['genero']?>" class="form-control" id="genero" placeholder="Genero" name="generoME" readonly>
-                                                                                    <?php endif; ?>
-                                                                                <?php endforeach; ?>
-                                                                                </div>
-                                                                            </div>
-
-
-                                                                            <div class="form-group row">
-                                                                                <label for="telefono" class="col-sm-2 col-form-label font-weight-bold">Teléfono:</label>
-                                                                                <div class="col-sm-10">
-                                                                                <?php foreach($mostrarDatos as $mostrarDato):?> 
-                                                                                    <?php if ($mostrarDato['idestudiantes'] == $mostrarEstudiante['idestudiantes']): ?>
-                                                                                    <input type="number" value="<?=$mostrarDato['telefono']?>" class="form-control" id="telefono" placeholder="Teléfono" name="telefonoME">
-                                                                                    <?php endif; ?>
-                                                                                <?php endforeach; ?>
-                                                                                </div>
-                                                                            </div>
-
-
-                                                                            <div class="form-group row">
-                                                                                <label for="email" class="col-sm-2 col-form-label font-weight-bold">Email:</label>
-                                                                                <div class="col-sm-10">
-                                                                                <?php foreach($mostrarDatos as $mostrarDato):?> 
-                                                                                    <?php if ($mostrarDato['idestudiantes'] == $mostrarEstudiante['idestudiantes']): ?>
-                                                                                    <input type="email" value="<?=$mostrarDato['email']?>" class="form-control" id="email" placeholder="Email" name="emailME">
-                                                                                    <?php endif; ?>
-                                                                                <?php endforeach; ?>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <!-- Campo oculto para enviar el valor de idestudiantes -->
-                                                                            <input type="hidden" name="idestudiantesME" value="<?=$mostrarEstudiante['idestudiantes']?>">
-                                                                            <div class="modal-footer">
-                                                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                                                                                <button class="btn btn-primary" type="submit">Modificar</button>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <!-- Enlace para eliminar el estudiante -->
-                                                        <a href="#confirmacionModal<?=$mostrarEstudiante['idestudiantes']?>" class="btn btn-danger btn-circle" data-toggle="modal">
-                                                            <i class="fas fa-trash"></i>
+                                                            <!-- Enlace para modificar el estudiante -->
+                                                        <a href="#registroEstudianteModal<?=$mostrarEstudiante['idestudiantes']?>" class="btn btn-info btn-circle" data-toggle="modal">
+                                                            <i class="fas fa-pencil-alt"></i>
                                                         </a>
-
-                                                            <!-- Ventana emergente de confirmación -->
-                                                            <div class="modal fade" id="confirmacionModal<?=$mostrarEstudiante['idestudiantes']?>" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog" role="document">
+                                                                                                                
+                                                        <!-- Ventana emergente para modificar el estudiante -->
+                                                            <div class="modal fade" id="registroEstudianteModal<?=$mostrarEstudiante['idestudiantes']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title" id="confirmacionModalLabel">Confirmación</h5>
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Modificar Estudiante</h5>
                                                                             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">×</span>
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            ¿Estás seguro de eliminar al estudiante?
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                                                                            <a href="index.php?ruta=registroestudiantes&idESTU=<?=$mostrarEstudiante['idestudiantes']?>" class="btn btn-primary">Eliminar</a>
+                                                                            <form method="post" class="user">
+
+                                                                                <div class="form-group row">
+                                                                                    <label for="nombre" class="col-sm-2 col-form-label font-weight-bold">Nombre:</label>
+                                                                                    <div class="col-sm-10">
+                                                                                    
+                                                                                    <?php foreach($mostrarDatos as $mostrarDato):?> 
+                                                                                        <?php if ($mostrarDato['idestudiantes'] == $mostrarEstudiante['idestudiantes']): ?>
+                                                                                        <input type="text" value="<?=$mostrarDato['nombre']?>" class="form-control" id="nombre" placeholder="Nombre" name="nombreME">
+                                                                                        <?php endif; ?>
+                                                                                    <?php endforeach; ?>  
+                                                                                    
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="form-group row">
+                                                                                    <label for="apellido" class="col-sm-2 col-form-label font-weight-bold">Apellido:</label>
+                                                                                    <div class="col-sm-10">
+                                                                                    <?php foreach($mostrarDatos as $mostrarDato):?> 
+                                                                                        <?php if ($mostrarDato['idestudiantes'] == $mostrarEstudiante['idestudiantes']): ?>
+                                                                                        <input type="text"  value="<?=$mostrarDato['apellido']?>" class="form-control" id="apellido" placeholder="Apellido" name="apellidoME">
+                                                                                        <?php endif; ?>
+                                                                                    <?php endforeach; ?>  
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="form-group row">
+                                                                                    <label for="dni" class="col-sm-2 col-form-label font-weight-bold">DNI:</label>
+                                                                                    <div class="col-sm-10">
+                                                                                    <?php foreach($mostrarDatos as $mostrarDato):?> 
+                                                                                        <?php if ($mostrarDato['idestudiantes'] == $mostrarEstudiante['idestudiantes']): ?>
+                                                                                        <input type="number" value="<?=$mostrarDato['dni']?>" class="form-control" id="dni" placeholder="DNI" name="dniME">
+                                                                                        <?php endif; ?>
+                                                                                    <?php endforeach; ?>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="form-group row">
+                                                                                    <label for="genero" class="col-sm-2 col-form-label font-weight-bold">Género:</label>
+                                                                                    <div class="col-sm-10">
+                                                                                    <?php foreach($mostrarDatos as $mostrarDato):?> 
+                                                                                        <?php if ($mostrarDato['idestudiantes'] == $mostrarEstudiante['idestudiantes']): ?>
+                                                                                        <input type="text" value="<?=$mostrarDato['genero']?>" class="form-control" id="genero" placeholder="Genero" name="generoME" readonly>
+                                                                                        <?php endif; ?>
+                                                                                    <?php endforeach; ?>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="form-group row">
+                                                                                    <label for="telefono" class="col-sm-2 col-form-label font-weight-bold">Teléfono:</label>
+                                                                                    <div class="col-sm-10">
+                                                                                    <?php foreach($mostrarDatos as $mostrarDato):?> 
+                                                                                        <?php if ($mostrarDato['idestudiantes'] == $mostrarEstudiante['idestudiantes']): ?>
+                                                                                        <input type="number" value="<?=$mostrarDato['telefono']?>" class="form-control" id="telefono" placeholder="Teléfono" name="telefonoME">
+                                                                                        <?php endif; ?>
+                                                                                    <?php endforeach; ?>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="form-group row">
+                                                                                    <label for="email" class="col-sm-2 col-form-label font-weight-bold">Email:</label>
+                                                                                    <div class="col-sm-10">
+                                                                                    <?php foreach($mostrarDatos as $mostrarDato):?> 
+                                                                                        <?php if ($mostrarDato['idestudiantes'] == $mostrarEstudiante['idestudiantes']): ?>
+                                                                                        <input type="email" value="<?=$mostrarDato['email']?>" class="form-control" id="email" placeholder="Email" name="emailME">
+                                                                                        <?php endif; ?>
+                                                                                    <?php endforeach; ?>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <!-- Campo oculto para enviar el valor de idestudiantes -->
+                                                                                <input type="hidden" name="idestudiantesME" value="<?=$mostrarEstudiante['idestudiantes']?>">
+                                                                                <div class="modal-footer">
+                                                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                                                                                    <button class="btn btn-primary" type="submit">Modificar</button>
+                                                                                </div>
+                                                                            </form>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                    </td>
+
+
+                                                            <!-- Enlace para eliminar el estudiante -->
+                                                            <a href="#confirmacionModal<?=$mostrarEstudiante['idestudiantes']?>" class="btn btn-danger btn-circle" data-toggle="modal">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+
+                                                                <!-- Ventana emergente de confirmación -->
+                                                                <div class="modal fade" id="confirmacionModal<?=$mostrarEstudiante['idestudiantes']?>" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="confirmacionModalLabel">Confirmación</h5>
+                                                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">×</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                ¿Estás seguro de eliminar al estudiante?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                                                                                <a href="index.php?ruta=registroestudiantes&idESTU=<?=$mostrarEstudiante['idestudiantes']?>" class="btn btn-primary">Eliminar</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </td>
                                                    
                                                     
                                                     

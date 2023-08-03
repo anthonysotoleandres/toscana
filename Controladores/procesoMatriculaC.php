@@ -33,9 +33,14 @@ public function mostrarEstudiantesC() {
             $datosC['matricula'] = $_POST['matriculaRM'];
             $datosC['mensualidad'] = $_POST['mensualidadRM'];
             $datosC['año'] = $_POST['añoRM'];
-            
+            $datosC['codigo_estudiante'] = $_POST['codigo_estudianteRM'];
+
             $resultado = $this->procesoMatriculaM->registroMatriculaM($datosC);
-            /// volver a inicio
+            /// registrar codigo
+            // Si el ciclo es igual a "Ciclo-I", registra el código
+            if ($datosC['ciclo'] === 'Ciclo-I') {
+                $resultado2 = $this->procesoMatriculaM->registrarCodigoM($datosC);
+            }
 
         }
     }
@@ -67,6 +72,39 @@ public function mostrarEstudiantesC() {
         return null;
     }
 }    
+
+
+ // BORRAR MATRICULA
+ public function borrarMatriculaC(){
+    if(isset($_GET['idMATRICULA'])){
+        $datosC = array();
+        $datosC['idmatriculas'] = $_GET['idMATRICULA'];
+        $resultado=$this->procesoMatriculaM->borrarMatriculaM($datosC);
+        header("location: index.php?ruta=matriculatotal");
+        exit();
+        
+    }
+}
+
+// MODIFICAR MATRICULA
+
+public function modificarMatriculaC(){
+    if(isset($_POST['idmatriculasMM'])){
+        $datosC = array();  
+        
+        $datosC['idmatriculas']= $_POST['idmatriculasMM'];
+        $datosC['matricula']= $_POST['matriculaMM']; 
+        $datosC['mensualidad']= $_POST['mensualidadMM'];
+      
+        $resultado = $this->procesoMatriculaM->modificarMatriculaM($datosC);
+        header("location: index.php?ruta=matriculatotal");
+        exit();
+        return $resultado;
+        
+    }
+}
+
+
 
 
 

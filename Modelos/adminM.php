@@ -15,10 +15,11 @@
             $un_temp = mysql_entities_fix_string($cBD, $usuario);
             $pw_temp = mysql_entities_fix_string($cBD, $clave);
             $pw_perfil = mysql_entities_fix_string($cBD, $perfil);
+
             
-            if($pw_perfil =='docentes'){
-                $query = "SELECT * FROM $tablaBD1
-                WHERE usuario='$un_temp' AND perfil='$pw_perfil'";
+            if($pw_perfil =='estudiante'){
+                $query = "SELECT * FROM estudiantes
+                WHERE dni='$un_temp' AND perfil='$pw_perfil'";
                 $result = $cBD->query($query);
 
                 if ($result->num_rows)
@@ -26,10 +27,10 @@
                     $rowp = $result->fetch_array(MYSQLI_NUM);
                     $result->close();
         
-                    if (password_verify($pw_temp, $rowp[4])) 
+                    if (password_verify($pw_temp, $rowp[7])) 
                     {   
-                        $query = "SELECT * FROM $tablaBD 
-                        WHERE usuario='$un_temp' AND idEquipoInvestigador ='$rowp[0]'";
+                        $query = "SELECT * FROM estudiantes 
+                        WHERE dni='$un_temp' AND idestudiantes ='$rowp[0]'";
                         $result = $cBD->query($query);
                         return $rowp[0];
                     }
@@ -58,32 +59,7 @@
 
                 }
            }
-
-
-            if($pw_perfil =='jurado'){
-
-                $query = "SELECT * FROM $tablaBD2
-                WHERE usuario='$un_temp' AND perfil='$pw_perfil'";
-                $result = $cBD->query($query);
-
-                if ($result->num_rows)
-                {
-                    $row = $result->fetch_array(MYSQLI_NUM);
-                    $result->close();
         
-                    if (password_verify($pw_temp, $row[4])) 
-                    {   
-                        $query = "SELECT * FROM $tablaBD2 
-                        WHERE usuario='$un_temp' AND idJurado ='$row[0]'";
-                        $result = $cBD->query($query);
-                        return $row[0];
-                    }
-
-                }
-        }           
-
-
-
 
         } 
     }

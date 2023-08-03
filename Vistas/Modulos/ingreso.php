@@ -43,7 +43,7 @@ $resultado = $adminC->IngresoC();
                                         <div class="form-group">
                                             <select class="form-control "  name="perfilI" >
                                                 <option value="administrador">Administrador</option>
-                                                <option value="docente">Docente</option>
+                                                <option value="estudiante">Estudiante</option>
 
                                             </select>
                                         </div>

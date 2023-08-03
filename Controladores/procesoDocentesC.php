@@ -27,6 +27,26 @@ class procesoDocentesC {
     return $resultado;
 }  
 
+
+ // MOSTRAR ASIGNATURAS
+ public function mostrarAsignaturasC(){
+    $resultado = $this->procesoDocentesM->mostrarAsignaturasM();
+    return $resultado;
+}  
+
+ // BORRAR ASIGNATURA
+ public function borrarAsignaturaC(){
+    if(isset($_GET['idCURSOS'])){
+        $datosC = array();
+        $datosC['idcursos'] = $_GET['idCURSOS'];
+        $resultado=$this->procesoDocentesM->borrarAsignaturaM($datosC);
+        header("location: index.php?ruta=registro_cursos");
+        exit();
+        
+    }
+}
+
+
 ////////////////////////////////////////////////////////////////////////////
 // Contar Docentes
 public function contarDocentesC(){

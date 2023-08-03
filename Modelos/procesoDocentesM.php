@@ -4,6 +4,7 @@ require_once "conexionBD.php";
 class procesoDocentesM extends ConexionBD{
     function __construct(){
         $this->tablaBD = 'docentes';
+        $this->tablaBD2 = 'cursos';
         
     }
 
@@ -44,7 +45,7 @@ class procesoDocentesM extends ConexionBD{
     }
 
 
-    /// /MOSTRAR ESTUDIANTES
+    /// /MOSTRAR DOCENTES
     public function mostrarDocentesM(){
         $cBD = $this->conectarBD();
         $iduser=$_SESSION['Ingreso'];
@@ -55,6 +56,35 @@ class procesoDocentesM extends ConexionBD{
         return $resultado;
 
     }
+
+    /// /MOSTRAR ASIGNATURA
+    public function mostrarAsignaturasM(){
+        $cBD = $this->conectarBD();
+        $iduser=$_SESSION['Ingreso'];
+
+        $query = "SELECT * FROM $this->tablaBD JOIN $this->tablaBD2 ON docentes_iddocentes= iddocentes";
+
+        $resultado = $cBD->query($query);
+        return $resultado;
+
+    }   
+     /// /BORRAR ASIGNATURA  
+     public function borrarAsignaturaM($datosC){
+        $cBD = $this->conectarBD();
+        $iduser=$_SESSION['Ingreso'];
+    
+        $IDE = $datosC['idcursos'];
+    
+
+        $query = "DELETE FROM cursos WHERE cursos.idcursos = '$IDE'";
+        $resultado = $cBD->query($query);
+    
+        return $resultado;
+    }   
+    
+
+
+
 ////////////////////////////////////////////////////////////////////
 
 /// /Contar Docentes
