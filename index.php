@@ -1,4 +1,4 @@
-<?php //index.phpss
+<?php //index.phpsss
 require_once 'Controladores/rutasC.php';
 require_once 'Controladores/adminC.php';
 
